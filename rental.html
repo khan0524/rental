@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>코지 스튜디오 | 촬영 공간 대여</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fdfaf7; /* 아주 연한 베이지 */
+            color: #333;
+        }
+        .container {
+            max-width: 1200px;
+        }
+        .section-title {
+            color: #5a4b40; /* 따뜻한 갈색 톤 */
+        }
+        .btn-primary {
+            background-color: #e0b99a; /* 따뜻한 베이지-오렌지 톤 */
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #d1a88b;
+        }
+        .input-field {
+            border-color: #e0d9d0; /* 연한 테두리 */
+            background-color: #fff;
+        }
+        .card {
+            background-color: #fff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+        /* Modal styles */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1000; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0,0,0,0.8); /* Black w/ opacity */
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-content {
+            margin: auto;
+            display: block;
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+        }
+        .close-button {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+        .close-button:hover,
+        .close-button:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-white shadow-sm py-4">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <h1 class="text-2xl font-semibold text-gray-800">
+                <a href="#" class="text-e0b99a hover:text-d1a88b">코지 스튜디오</a>
+            </h1>
+            <nav>
+                <ul class="flex space-x-6">
+                    <li><a href="#space-intro" class="text-gray-600 hover:text-e0b99a font-medium">공간 소개</a></li>
+                    <li><a href="#gallery" class="text-gray-600 hover:text-e0b99a font-medium">사진 갤러리</a></li>
+                    <li><a href="#booking" class="text-gray-600 hover:text-e0b99a font-medium">예약하기</a></li>
+                    <li><a href="#instructions" class="text-gray-600 hover:text-e0b99a font-medium">이용 안내</a></li>
+                    <li><a href="#reviews" class="text-gray-600 hover:text-e0b99a font-medium">리뷰</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+
+        <section class="mb-16 rounded-xl overflow-hidden shadow-lg">
+            <div class="relative h-96 md:h-[500px] bg-cover bg-center" style="background-image: url('https://img.hourplace.co.kr/place/user/93381/2025/02/17/c43e3e82-3b28-4549-8cb9-091313bee1ef?s=2000x2000&t=inside&q=80');">
+                <div class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center p-4">
+                    <div class="text-center text-white">
+                        <h2 class="text-4xl md:text-5xl font-bold mb-4 drop-shadow-md">당신의 완벽한 촬영 공간, <br>코지 스튜디오에서 만나보세요.</h2>
+                        <p class="text-lg md:text-xl font-light">자연광 가득한 아파트에서 특별한 순간을 담아가세요.</p>
+                        <a href="#booking" class="mt-8 inline-block btn-primary px-8 py-3 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl">지금 예약하기</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="space-intro" class="mb-16 py-12 px-6 card rounded-xl">
+            <h2 class="text-3xl font-bold text-center mb-10 section-title">✨ 우리 공간 소개</h2>
+            <div class="grid md:grid-cols-2 gap-10 items-center">
+                <div>
+                    <h3 class="text-2xl font-semibold mb-4 text-gray-700">넓은 거실과 풍부한 자연광</h3>
+                    <p class="text-gray-600 leading-relaxed mb-4">
+                        저희 코지 스튜디오는 아파트의 넓은 거실을 활용하여 다양한 촬영 컨셉을 소화할 수 있도록 꾸며져 있습니다.
+                        특히, 큰 창을 통해 하루 종일 따뜻하고 풍부한 자연광이 쏟아져 들어와 인물 및 제품 촬영에 최적의 환경을 제공합니다.
+                        별도의 조명 없이도 화사하고 생동감 있는 결과물을 얻으실 수 있습니다.
+                    </p>
+                    <p class="text-gray-600 leading-relaxed">
+                        화이트와 베이지 톤의 미니멀하면서도 코지한 인테리어는 어떤 촬영에도 잘 어우러지며,
+                        다양한 소품과 가구를 활용하여 다채로운 분위기를 연출할 수 있습니다.
+                        편안하고 아늑한 분위기 속에서 창의적인 작업을 펼쳐보세요.
+                    </p>
+                </div>
+                <div class="rounded-lg overflow-hidden shadow-md">
+                    <img src="https://img.hourplace.co.kr/place/user/93381/2025/02/17/c43e3e82-3b28-4549-8cb9-091313bee1ef?s=2000x2000&t=inside&q=80" alt="채광 좋은 거실" class="w-full h-auto object-cover">
+                </div>
+            </div>
+        </section>
+
+        <section id="gallery" class="mb-16 py-12 px-6 card rounded-xl">
+            <h2 class="text-3xl font-bold text-center mb-10 section-title">📸 사진 갤러리</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <div class="rounded-lg overflow-hidden shadow-md cursor-pointer" onclick="openModal('https://img.hourplace.co.kr/place/user/93381/2025/02/17/c43e3e82-3b28-4549-8cb9-091313bee1ef?s=2000x2000&t=inside&q=80')">
+                    <img src="https://img.hourplace.co.kr/place/user/93381/2025/02/17/c43e3e82-3b28-4549-8cb9-091313bee1ef?s=2000x2000&t=inside&q=80" alt="갤러리 사진 1" class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105">
+                </div>
+                <div class="rounded-lg overflow-hidden shadow-md cursor-pointer" onclick="openModal('https://img.hourplace.co.kr/place/user/93381/2025/02/17/1ad3445a-a480-4c36-b21c-9aed352d1ce6?s=2000x2000&t=inside&q=80')">
+                    <img src="https://img.hourplace.co.kr/place/user/93381/2025/02/17/1ad3445a-a480-4c36-b21c-9aed352d1ce6?s=2000x2000&t=inside&q=80" alt="갤러리 사진 2" class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105">
+                </div>
+                <div class="rounded-lg overflow-hidden shadow-md cursor-pointer" onclick="openModal('https://img.hourplace.co.kr/place/user/93381/2025/02/17/c7cda107-ff4c-4db1-a49f-5f56da3b06a4?s=2000x2000&t=inside&q=80')">
+                    <img src="https://img.hourplace.co.kr/place/user/93381/2025/02/17/c7cda107-ff4c-4db1-a49f-5f56da3b06a4?s=2000x2000&t=inside&q=80" alt="갤러리 사진 3" class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105">
+                </div>
+                <div class="rounded-lg overflow-hidden shadow-md cursor-pointer" onclick="openModal('https://img.hourplace.co.kr/place/user/93381/2025/02/17/c43e3e82-3b28-4549-8cb9-091313bee1ef?s=2000x2000&t=inside&q=80')">
+                    <img src="https://img.hourplace.co.kr/place/user/93381/2025/02/17/c43e3e82-3b28-4549-8cb9-091313bee1ef?s=2000x2000&t=inside&q=80" alt="갤러리 사진 4" class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105">
+                </div>
+                <div class="rounded-lg overflow-hidden shadow-md cursor-pointer" onclick="openModal('https://img.hourplace.co.kr/place/user/93381/2025/02/17/1ad3445a-a480-4c36-b21c-9aed352d1ce6?s=2000x2000&t=inside&q=80')">
+                    <img src="https://img.hourplace.co.kr/place/user/93381/2025/02/17/1ad3445a-a480-4c36-b21c-9aed352d1ce6?s=2000x2000&t=inside&q=80" alt="갤러리 사진 5" class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105">
+                </div>
+                <div class="rounded-lg overflow-hidden shadow-md cursor-pointer" onclick="openModal('https://img.hourplace.co.kr/place/user/93381/2025/02/17/c7cda107-ff4c-4db1-a49f-5f56da3b06a4?s=2000x2000&t=inside&q=80')">
+                    <img src="https://img.hourplace.co.kr/place/user/93381/2025/02/17/c7cda107-ff4c-4db1-a49f-5f56da3b06a4?s=2000x2000&t=inside&q=80" alt="갤러리 사진 6" class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105">
+                </div>
+            </div>
+        </section>
+
+        <div id="imageModal" class="modal">
+            <span class="close-button" onclick="closeModal()">&times;</span>
+            <img class="modal-content" id="modalImage">
+        </div>
+
+        <section id="booking" class="mb-16 py-12 px-6 card rounded-xl">
+            <h2 class="text-3xl font-bold text-center mb-10 section-title">🗓️ 예약하기</h2>
+            <div class="grid md:grid-cols-2 gap-10">
+                <div>
+                    <h3 class="text-2xl font-semibold mb-4 text-gray-700">날짜 및 시간 선택 <span class="text-lg font-normal text-gray-500">(시간당 3만원, 최소 2시간)</span></h3>
+                    <div class="mb-4">
+                        <label for="bookingDate" class="block text-gray-700 text-sm font-bold mb-2">날짜 선택:</label>
+                        <input type="date" id="bookingDate" class="input-field shadow appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" onchange="updatePrice()">
+                    </div>
+                    <div class="grid grid-cols-2 gap-4 mb-4">
+                        <div>
+                            <label for="startTime" class="block text-gray-700 text-sm font-bold mb-2">시작 시각:</label>
+                            <select id="startTime" class="input-field shadow border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" onchange="updatePrice()">
+                                </select>
+                        </div>
+                        <div>
+                            <label for="endTime" class="block text-gray-700 text-sm font-bold mb-2">마감 시각:</label>
+                            <select id="endTime" class="input-field shadow border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" onchange="updatePrice()">
+                                </select>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <label for="numPeople" class="block text-gray-700 text-sm font-bold mb-2">예상 인원 (1명당 1만원 추가):</label>
+                        <input type="number" id="numPeople" min="1" value="1" class="input-field shadow appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" onchange="updatePrice()">
+                    </div>
+                    <div class="text-xl font-bold text-right mt-6">
+                        예상 가격: <span id="estimatedPrice" class="text-e0b99a">0원</span>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-2xl font-semibold mb-4 text-gray-700">예약 정보 입력</h3>
+                    <form id="bookingForm" class="space-y-4">
+                        <div>
+                            <label for="userName" class="block text-gray-700 text-sm font-bold mb-2">이름:</label>
+                            <input type="text" id="userName" class="input-field shadow appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="이름을 입력해주세요." required>
+                        </div>
+                        <div>
+                            <label for="userContact" class="block text-gray-700 text-sm font-bold mb-2">연락처:</label>
+                            <input type="tel" id="userContact" class="input-field shadow appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="010-1234-5678" required>
+                        </div>
+                        <div>
+                            <label for="purpose" class="block text-gray-700 text-sm font-bold mb-2">촬영 목적:</label>
+                            <textarea id="purpose" rows="3" class="input-field shadow appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="촬영 목적을 자세히 알려주세요." required></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary w-full py-3 rounded-lg text-xl font-semibold shadow-md hover:shadow-lg">예약 요청하기</button>
+                    </form>
+                    <div id="messageBox" class="mt-4 p-3 rounded-lg text-center hidden"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="instructions" class="mb-16 py-12 px-6 card rounded-xl">
+            <h2 class="text-3xl font-bold text-center mb-10 section-title">📝 이용 안내</h2>
+            <div class="space-y-6 text-gray-600 leading-relaxed">
+                <div>
+                    <h3 class="text-2xl font-semibold mb-3 text-gray-700">예약 절차</h3>
+                    <p>
+                        날짜 및 시간 선택 후 예약 폼을 작성하여 제출하시면, 관리자가 내용을 확인하고 승인 여부를 이메일 또는 웹사이트 내 알림으로 안내해 드립니다.
+                        예약 확정 후 계좌 이체로 결제를 완료하시면 최종 예약이 완료됩니다.
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-semibold mb-3 text-gray-700">이용 규칙</h3>
+                    <p>
+                        촬영 공간은 깨끗하게 사용해 주시고, 다음 이용자를 위해 정리 정돈을 부탁드립니다.
+                        소음 발생에 유의해 주시고, 시설물 파손 시 배상 책임이 발생할 수 있습니다.
+                        자세한 이용 규칙은 예약 확정 시 안내해 드립니다.
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-semibold mb-3 text-gray-700">취소 및 환불 규정</h3>
+                    <p>
+                        예약 취소는 예약일로부터 7일 전까지 가능하며, 취소 시점에 따라 환불 규정이 적용됩니다.
+                        자세한 환불 비율은 예약 확정 시 안내해 드립니다.
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-semibold mb-3 text-gray-700">사전 답사비</h3>
+                    <p>
+                        사전 답사를 원하시는 경우, 소정의 답사비가 발생할 수 있습니다.
+                        사전 답사 가능 시간 및 절차는 별도로 문의해 주시기 바랍니다.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="reviews" class="py-12 px-6 card rounded-xl">
+            <h2 class="text-3xl font-bold text-center mb-10 section-title">⭐ 고객 리뷰</h2>
+            <div class="text-center text-gray-500">
+                <p>아직 작성된 리뷰가 없습니다. 첫 번째 리뷰를 남겨주세요!</p>
+                <p class="mt-4 text-sm">
+                    (리뷰 작성 기능은 대여 완료 후 제공될 예정입니다.)
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-gray-800 text-white py-8 mt-16">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2024 코지 스튜디오. All rights reserved.</p>
+            <p class="text-sm mt-2">문의: contact@cozystudio.com</p>
+        </div>
+    </footer>
+
+    <script>
+        // Function to populate time select options
+        function populateTimeOptions() {
+            const startTimeSelect = document.getElementById('startTime');
+            const endTimeSelect = document.getElementById('endTime');
+            startTimeSelect.innerHTML = '';
+            endTimeSelect.innerHTML = '';
+
+            // Populate start time options from 10 AM (10) to 4 PM (16)
+            for (let i = 10; i <= 16; i++) { // Changed upper limit to 16 for start time
+                const hour = i.toString().padStart(2, '0');
+                const optionStart = document.createElement('option');
+                optionStart.value = hour + ':00';
+                optionStart.textContent = hour + ':00';
+                startTimeSelect.appendChild(optionStart);
+            }
+
+            // Populate end time options from 10 AM (10) to 6 PM (18)
+            for (let i = 10; i <= 18; i++) { // End time remains up to 18
+                const hour = i.toString().padStart(2, '0');
+                const optionEnd = document.createElement('option');
+                optionEnd.value = hour + ':00';
+                optionEnd.textContent = hour + ':00';
+                endTimeSelect.appendChild(optionEnd);
+            }
+
+            // Set default times (e.g., 10:00 to 18:00)
+            startTimeSelect.value = '10:00';
+            endTimeSelect.value = '18:00';
+        }
+
+        // Function to calculate and update the estimated price
+        function updatePrice() {
+            const startTime = document.getElementById('startTime').value;
+            const endTime = document.getElementById('endTime').value;
+            const numPeople = parseInt(document.getElementById('numPeople').value);
+            const estimatedPriceElement = document.getElementById('estimatedPrice');
+
+            if (!startTime || !endTime || isNaN(numPeople) || numPeople < 1) {
+                estimatedPriceElement.textContent = '0원';
+                return;
+            }
+
+            const startHour = parseInt(startTime.split(':')[0]);
+            const endHour = parseInt(endTime.split(':')[0]);
+
+            let hours = endHour - startHour;
+            
+            // Apply minimum booking time of 2 hours
+            const minimumHours = 2;
+            if (hours < minimumHours) {
+                hours = minimumHours; 
+            }
+
+            // Also ensure end time is not before start time, considering minimum hours
+            if (endHour < startHour + minimumHours) {
+                // If the selected end time is less than (start time + minimum hours),
+                // adjust the calculated hours to minimumHours to reflect the pricing correctly.
+                // This doesn't change the selected dropdown value, but ensures correct price calculation.
+                hours = minimumHours;
+            }
+
+
+            const baseRatePerHour = 30000; // 시간당 기본 요금 3만원
+            const additionalPersonRate = 10000; // 1명당 1만원 추가
+
+            let totalPrice = (baseRatePerHour * hours) + (additionalPersonRate * numPeople);
+
+            estimatedPriceElement.textContent = `${totalPrice.toLocaleString()}원`;
+        }
+
+        // Handle booking form submission
+        document.getElementById('bookingForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            const userName = document.getElementById('userName').value;
+            const userContact = document.getElementById('userContact').value;
+            const purpose = document.getElementById('purpose').value;
+            const bookingDate = document.getElementById('bookingDate').value;
+            const startTime = document.getElementById('startTime').value;
+            const endTime = document.getElementById('endTime').value;
+            const numPeople = document.getElementById('numPeople').value;
+            const estimatedPrice = document.getElementById('estimatedPrice').textContent;
+            const messageBox = document.getElementById('messageBox');
+
+            // Simple validation
+            if (!userName || !userContact || !purpose || !bookingDate || !startTime || !endTime || !numPeople) {
+                messageBox.className = 'mt-4 p-3 rounded-lg text-center bg-red-100 text-red-700';
+                messageBox.textContent = '모든 필드를 채워주세요.';
+                messageBox.style.display = 'block';
+                return;
+            }
+
+            const startHour = parseInt(startTime.split(':')[0]);
+            const endHour = parseInt(endTime.split(':')[0]);
+            const minimumHours = 2;
+
+            if (endHour < startHour + minimumHours) {
+                messageBox.className = 'mt-4 p-3 rounded-lg text-center bg-red-100 text-red-700';
+                messageBox.textContent = `최소 예약 시간은 ${minimumHours}시간입니다. 마감 시각을 다시 선택해주세요.`;
+                messageBox.style.display = 'block';
+                return;
+            }
+
+
+            const bookingDetails = {
+                이름: userName,
+                연락처: userContact,
+                촬영목적: purpose,
+                희망날짜: bookingDate,
+                시작시각: startTime,
+                마감시각: endTime,
+                예상인원: numPeople,
+                예상가격: estimatedPrice
+            };
+
+            console.log('예약 요청 정보:', bookingDetails);
+
+            // Simulate sending data to a server
+            messageBox.className = 'mt-4 p-3 rounded-lg text-center bg-green-100 text-green-700';
+            messageBox.textContent = '예약 요청이 성공적으로 접수되었습니다. 관리자 확인 후 이메일로 안내해 드릴게요!';
+            messageBox.style.display = 'block';
+
+            // Clear form after submission (optional)
+            this.reset();
+            updatePrice(); // Reset price display
+        });
+
+        // Modal functionality for gallery images
+        function openModal(src) {
+            const modal = document.getElementById("imageModal");
+            const modalImage = document.getElementById("modalImage");
+            modal.style.display = "flex"; // Use flex to center content
+            modalImage.src = src;
+        }
+
+        function closeModal() {
+            const modal = document.getElementById("imageModal");
+            modal.style.display = "none";
+        }
+
+        // Initialize on page load
+        window.onload = function() {
+            populateTimeOptions();
+            updatePrice(); // Initial price calculation
+            // Set today's date as default for bookingDate input
+            const today = new Date();
+            const yyyy = today.getFullYear();
+            const mm = String(today.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed
+            const dd = String(today.getDate()).padStart(2, '0');
+            document.getElementById('bookingDate').value = `${yyyy}-${mm}-${dd}`;
+        };
+    </script>
+</body>
+</html>
